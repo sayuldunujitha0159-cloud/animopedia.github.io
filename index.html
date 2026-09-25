@@ -5,7 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0c7c86" />
     <meta name="description" content="ANIMOPEDIA — Discover the incredible world of animals." />
+    <link rel="manifest" href="/manifest.webmanifest" />
     <title>ANIMOPEDIA · Discover the incredible world of animals</title>
   </head>
-  <body><div id="root"></div><script type="module" src="/src/main.jsx"></script></body>
+  <body>
+    <div id="root"></div>
+    <div id="connection-status" class="connection-status" role="status" aria-live="polite">Online · ready</div>
+    <script type="module" src="/src/main.jsx"></script>
+    <script>
+      (function () {
+        const status = document.getElementById('connection-status');
+        const update = () => {
+          const online = navigator.onLine;
+          status.textContent = online ? 'Online · ready' : 'Offline · cached learning available';
+          status.dataset.state = online ? 'online' : 'offline';
+        };
+        update();
+        window.addEventListener('online', update);
+        window.addEventListener('offline', update);
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('/sw.js').catch(() => {
+            status.textContent = navigator.onLine ? 'Online · cache unavailable' : 'Offline · limited cached content';
+          });
+        }
+      }());
+    </script>
+  </body>
 </html>

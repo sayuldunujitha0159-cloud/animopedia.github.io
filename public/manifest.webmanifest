@@ -1,0 +1,10 @@
+{
+  "name": "ANIMOPEDIA",
+  "short_name": "ANIMOPEDIA",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fbfaf5",
+  "theme_color": "#0c7c86",
+  "description": "A global animal encyclopedia and natural-history museum.",
+  "icons": []
+}
